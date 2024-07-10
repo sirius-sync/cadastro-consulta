@@ -8,21 +8,23 @@ control_sys = "roda"
 while control_sys == "roda": # while que sempre reinicia o sistema e age em conjunto com o while da classe
   ids = [] # ids dos profs e alunos
   informacoes_gerais = {} # dicionario com os dados dos professores e dos alunos
-  control_class = "roda" # faz com que a classe reinicie a cada iteração
+  control_class = "roda"
   
-  
-  while control_class == "roda": # while que roda a classe e permite o controle de reinicio com entradas invalidas
+  while control_class == "roda": # while que roda a classe e permite o controle de reinicio com entradas invalidas  
     class Sistema:
       def __init__(self, classificacao):
         self.id = "" # constroi a variavel id com self para ser acessivel facilmente
         self.classificacao = classificacao # diz que classificacao é igual ao valor inputado pelo usuario (1 ou 2)
 
-        if self.classificacao == 2:
+        if int(self.classificacao) == 2:
           self.classificacao = "professor" 
-        elif self.classificacao == 1:
+          print(self.classificacao)
+        elif int(self.classificacao) == 1:
           self.classificacao = "aluno"
+          print(self.classificacao)
         else: 
           print("mds veyr")
+          global control_class
           control_class = "não roda" # dá break fazendo a classe reiniciar, uma vez 
 
       def gerar_id(self): # define a função que vai gerar id's e herda self p lidar com a variavel self.id
@@ -42,6 +44,7 @@ while control_sys == "roda": # while que sempre reinicia o sistema e age em conj
             self.nascimento = input("Digite sua data de nascimento (xx/xx/xxxx): ")
             if len(self.nascimento) != 10: # se a data de nascimento for menor q 10 digitos (n seguindo o padrao estabelecido) ele  insere dnv
               print("Insira corretamente sua data de nascimento.")
+              self.nascimento = ""
               print("") # /n elegante
             else:
               subsequencia = self.nascimento[-4:]
@@ -99,36 +102,45 @@ while control_sys == "roda": # while que sempre reinicia o sistema e age em conj
         print("")
         print(df.loc[seu_id])
 
-parametro_init = input("Se você for professor, digite 2; se for aluno, digite 1: ") # dita a classificacao
-obj = Sistema(parametro_init)
-print("Bem vindo(a) ao Catálogo Escolar!")
-print("")
-consulta_ou_cadastro = input("Se você deseja se cadastrar no sistema, digite 1; caso queira consultar dados, digite 2")
-if consulta_ou_cadastro == 1:
-  obj.cadastrar_pessoa()
+    
+    print("Bem vindo(a) ao Catálogo Escolar!")
+    print("")
+    parametro_init = input("Se você for professor, digite 2; se for aluno, digite 1: ") # dita a classificacao
+    obj = Sistema(parametro_init)
+    consulta_ou_cadastro = input("Se você deseja se cadastrar no sistema, digite 1; caso queira consultar dados, digite 2: ")
+    if consulta_ou_cadastro == 1:
+      obj.cadastrar_pessoa()
+    elif consulta_ou_cadastro == 2: 
+      obj.consultar_pessoa()
+      
 
-    dados = {
-        'Alice': {'idade': 25, 'altura': 1.70, 'cidade': 'São Paulo', 'profissão': 'Engenheira'},
-        'Paulo': {'idade': 30, 'altura': 1.75, 'cidade': 'Rio de Janeiro', 'profissão': 'Médico'}
-    }
+  
+ 
 
-    # Adicionando os dados de Roberta
-    dados['Roberta'] = {'idade': 22, 'altura': 1.65, 'cidade': 'Belo Horizonte', 'profissão': 'Designer'}
 
-    import pandas as pd
 
-    # Estrutura de dados inicial
-    dados = {
-        'Alice': {'idade': 25, 'altura': 1.70, 'cidade': 'São Paulo', 'profissão': 'Engenheira'},
-        'Paulo': {'idade': 30, 'altura': 1.75, 'cidade': 'Rio de Janeiro', 'profissão': 'Médico'}
-    }
+#  # dados = {
+  #        'Alice': {'idade': 25, 'altura': 1.70, 'cidade': 'São Paulo', 'profissão': 'Engenheira'},
+  #        'Paulo': {'idade': 30, 'altura': 1.75, 'cidade': 'Rio de Janeiro', 'profissão': 'Médico'}
+  #    }
 
-    # Adicionando os dados de Roberta
-    dados['Roberta'] = {'idade': 22, 'altura': 1.65, 'cidade': 'Belo Horizonte', 'profissão': 'Designer'}
+      # Adicionando os dados de Roberta
+  #    dados['Roberta'] = {'idade': 22, 'altura': 1.65, 'cidade': 'Belo Horizonte', 'profissão': 'Designer'}
 
-    # Convertendo o dicionário em um DataFrame
-    df = pd.DataFrame(dados).T  # Transpõe o DataFrame para que os nomes sejam as linhas
+  #    import pandas as pd
 
-    # Exibindo apenas as informações de Paulo
-    print(df.loc['Paulo'])
+      # Estrutura de dados inicial
+   #   dados = {
+   #       'Alice': {'idade': 25, 'altura': 1.70, 'cidade': 'São Paulo', 'profissão': 'Engenheira'},
+    #      'Paulo': {'idade': 30, 'altura': 1.75, 'cidade': 'Rio de Janeiro', 'profissão': 'Médico'}
+   #   }
+
+     # # Adicionando os dados de Roberta
+   #   dados['Roberta'] = {'idade': 22, 'altura': 1.65, 'cidade': 'Belo Horizonte', 'profissão': 'Designer'}
+
+      # Convertendo o dicionário em um DataFrame
+    #  df = pd.DataFrame(dados).T  # Transpõe o DataFrame para que os nomes sejam as linhas
+
+      # Exibindo apenas as informações de Paulo
+     # print(df.loc['Paulo'])
 
